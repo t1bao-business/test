@@ -1,0 +1,39 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <a ng-href="#/merchandise/home"> <i class="fa fa-arrow-left"></i> </a>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        <a class="btn dropdown-toggle" type="button" id="category-dropdown" data-toggle="dropdown" aria-expanded="true">
+          分类列表
+        </a>
+
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <a ng-href="#/merchandise/search"> <i class="fa fa-search"></i> </a> &nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="merchandise-list margin-top">
+    <div class="list list-bar" ng-repeat="category in categories track by $index">
+      <div class="list-text-item"><span>ID:</span>{{category.id}}</div>
+      <div class="list-text-item"><span>分类名:</span>{{category.name || ""}}</div>
+      <div class="list-text-item"><span>排序号:</span>{{category.order || ""}}</div>
+      <div class="list-text-item">
+        <button class="btn btn-warning" ng-show="!category.online" ng-click="online(category);$event.stopPropagation()">上线
+    </button>
+        <button class="btn btn-success" ng-show="category.online" ng-click="offline(category);$event.stopPropagation()">下线
+    </button>
+
+        <a class="btn btn-info" href="#/category/edit/{{category.id}}">修改
+    </a>
+        <button class="btn btn-danger" ng-click="remove(category);$event.stopPropagation()">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

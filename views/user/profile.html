@@ -1,0 +1,55 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-2">
+        <a href="#/user/home">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="col-md-6 col-xs-8">我的信息</div>
+      <div class="col-md-3 col-xs-2"></div>
+    </div>
+  </div>
+</div>
+<div class="body-bar">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="user-profile modify">
+          <div class="form-group">
+            <label for="nickname" class="control-label">昵称</label>
+            <input type="text" class="form-control" name="nickname" id="nickname" placeholder="" value="{{user.extra.nickname}}">
+          </div>
+          <div class="form-group">
+            <label for="phone" class="control-label">电话</label>
+            <!-- <input type="text" class="form-control" name="phone" id="phone" placeholder="" value="{{user.phone}}"> -->
+            <p class="form-control-static">{{user.phone}}</p>
+
+          </div>
+          <div class="form-group">
+            <label for="email" class="control-label">邮箱</label>
+            <!-- <input type="text" class="form-control" name="email" id="email" placeholder="" value="{{user.email}}"> -->
+            <p class="form-control-static">{{user.email}}</p>
+          </div>
+          <div class="form-group">
+            <label for="intro" class="control-label">介绍</label>
+            <textarea class="form-control" name="intro" id="intro" placeholder="">{{user.extra.intro}}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="logo" class="control-label">头像</label>
+            <img ng-src="{{user.extra.avatar.url || ''}}" name="image-logo" class="image-uploader"/>
+            <!-- <span class="cross"><i class="fa fa-plus"></i></span> -->
+            <div class="image-uploader">
+              <input type="file" id="logo" class="image-uploader" name="avatar" onchange="angular.element(this).scope().fileChanged()"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-danger btn-block" ng-click="modify()">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

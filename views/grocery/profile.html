@@ -1,0 +1,70 @@
+<div class="list pad">
+  <div class="list-text-item">
+    <span>门店名称:</span> {{grocery.name}} &nbsp;
+  </div>
+  <div class="list-text-item">
+    <span>门店电话:</span> {{grocery.phone}} &nbsp;
+  </div>
+  <div class="list-text-item">
+    <span>营业时间:</span>
+
+    <i ng-model="start_time">{{grocery.start_time}}</i> 至
+    <i ng-model="end_time">{{grocery.end_time}}</i>
+  </div>
+  <div class="list-text-item">
+    <span>门店地址:</span> {{grocery.address}} &nbsp;
+  </div>
+  <div class="list-text-item">
+    <span>门店介绍:</span><i class="text-left">{{grocery.intro}} &nbsp;</i>
+  </div>
+  <div class="list-text-item">
+    <span>门店logo:</span>
+
+    <img ng-src="{{grocery.logo}}" height="50px" />
+    <a ng-href="{{grocery.logo}}" target="_blank"></a>
+  </div>
+  <div class="list-text-item">
+    <span>是否配送:</span> {{grocery.delivery ? '是' : '否'}} &nbsp;
+  </div>
+  <div class="list-text-item">
+    <span>配送距离:</span> {{grocery.delivery_distance}} &nbsp;
+  </div>
+  <div class="list-text-item">
+    <span>起送额:</span> {{grocery.delivery_limit}} &nbsp;
+  </div>
+  <div class="list-text-item">
+    <span>送货费:</span> {{grocery.delivery_fee}} &nbsp;
+  </div>
+  <div class="list-text-item" ng-show="grocery.approved !== 'APPROVED'">
+    <span>申请审核:</span>
+    <p class="form-control-static" ng-switch on="grocery.approved">
+      <button class="btn btn-default" ng-show="grocery.approved  !== 'APPROVED'" ng-click="verfiy()">申请审核</button>
+    </p>
+  </div>
+  <div class="list-text-item">
+    <span>是否通过审核:</span>
+    <code class="form-control-static" ng-switch on="grocery.approved">
+      <i ng-switch-when="APPROVED">审核通过</i>
+      <i ng-switch-when="REJECTED">审核未通过</i>
+      <i ng-switch-when="UNCHECKED">尚未审核</i>
+      <i ng-switch-default>尚未审核</i>
+    </code>
+  </div>
+  <div class="list-text-item">
+    <span>上线管理:</span>
+
+    <code class="form-control-static" ng-switch on="grocery.online">
+      <i ng-switch-when="true">已上线</i>
+      <i ng-switch-when="false">未上线</i>
+    </code> &nbsp;
+    <button class="btn btn-default" ng-show="grocery.online" ng-click="offline()">下线</button>
+    <button class="btn btn-default" ng-show="!grocery.online" ng-click="online()">上线</button>
+
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+    </div>
+  </div>
+</div>

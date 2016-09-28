@@ -1,0 +1,59 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3"></div>
+      <div class="col-md-6 col-xs-6">
+        店长信息
+      </div>
+      <div class="col-md-3 col-xs-3"></div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="user">
+    <div class="list margin-top">
+      <a class="profile" href="#/user/profile">
+        <div class="logo"><img ng-src="{{user.extra.avatar.url || 'images/logo.png'}}" class="image-uploader"/></div>
+        <div class="content">
+          <h1>
+            {{user.extra.nickname || "昵称未指定"}}
+          </h1>
+          <h2>
+            {{user.username || "&nbsp;"}}
+
+          </h2>
+        </div>
+      </a>
+    </div>
+    <div class="list margin-top">
+      <a class="list-select-item" href="#/user/password">
+        <i class="fa fa-key list-item-style icon-password"></i>
+        密码修改
+      </a>
+    </div>
+    <div class="list margin-top">
+      <a class="list-select-item" href="#/user/about">
+        <i class="fa fa-question-circle list-item-style icon-about"></i>
+        关于
+      </a>
+      <a class="list-select-item" href="#/user/feedback">
+        <i class="fa fa-commenting list-item-style icon-feedback"></i>
+        意见反馈
+      </a>
+    </div>
+    <div class="list margin-top">
+      <a class="list-select-item" href="http://m.t1bao.com/">
+        <i class="fa fa-external-link-square list-item-style icon-link"></i>
+        查看消费者端
+      </a>
+    </div>
+    <div class="list margin-top">
+      <a class="list-select-item-no-arrow" ng-click="logout()">
+        <i class="fa fa-sign-out list-item-style icon-logout"></i>
+        退出
+      </a>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

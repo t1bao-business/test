@@ -1,0 +1,65 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-2"></div>
+      <div class="col-md-6 col-xs-8">密码找回</div>
+      <div class="col-md-3 col-xs-2"></div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 col-lg-12">
+        <form class="user-login">
+          <div class="form-group" ng-show="!checked">
+            <label for="image-captcha">图片验证码：</label>
+
+            <p id="image-captcha"><span data="{{url}}captcha/image" ng-click="updateImage()"><img
+          src="{{url}}captcha/image"/>
+            </span>
+              <i class="fa fa-check-circle" ng-show="captcha && checked"></i>
+              <i class="fa fa-times-circle" ng-show="captcha && !checked"> 验证码错误</i>
+            </p>
+          </div>
+          <div class="form-group" ng-show="!checked">
+            <label>输入图片验证码：</label>
+            <input name="captchaImage" type="text" class="form-control" placeholder="验证码">
+            <br/>
+            <p class="text-info">验证码正确后，找回流程会自动开启</p>
+          </div>
+          <!--<div class="form-group" ng-show="!retrievePhone && checked">
+            <label for="email">输入注册邮箱</label>
+            <input type="email" required class="form-control" id="email" placeholder="请输入注册邮箱" name="email" ng-model="email">
+          </div>-->
+          <div class="form-group" ng-show="retrievePhone && checked">
+            <label for="phone">输入注册手机号</label>
+            <input type="text" required class="form-control" id="phone" placeholder="请输入注册手机号" name="phone" ng-model="phone">
+          </div>
+          <p class="center">
+            <button type="button" class="btn btn-danger btn-block" ng-class="{disabled: !checked}" ng-click="retrieve(retrievePhone)">找回密码</button>
+          </p>
+          <!--<p class="center">
+            <a ng-click="retrievePassword()" ng-show="!retrievePhone">通过手机找回</a>
+            <a ng-click="retrieveSwitch(false)" ng-show="retrievePhone">通过邮箱找回</a>
+          </p>-->
+          <hr/>
+          <p class="alert-default" role="alert">
+            没有账号?马上
+            <a class="btn btn-warning" href="#/user/register">注册</a>
+          </p>
+          <p class="alert-primary text-right" role="alert">
+            已经有账号？马上
+            <a class="btn btn-default" href="#/user/login">登录</a>
+          </p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /container -->
+<div ng-include src="'views/modal.html'"></div>
+
+<div ng-include src="'views/footer.html'"></div>

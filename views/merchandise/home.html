@@ -1,0 +1,89 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <!--<i class="ifa ifa-scan" ng-click="scan()"></i>-->
+      </div>
+      <div class="col-md-6 col-xs-6">
+        商品管理
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <a href="#/search/merchandise">
+          <i class="fa fa-search"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="container">
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item position" href="#/category/add">
+          <i class="fa fa-plus"></i>
+          <span>添加分类</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item settings" href="#/category/list">
+          <i class="fa fa-gear"></i>
+          <span>分类列表</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item preview" ng-click="click('preview')">
+          <i class="fa fa-home"></i>
+          <span>商品分类</span>
+        </a>
+      </div>
+    </div>
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item merchandise" href="#/merchandise/add">
+          <i class="fa fa-plus"></i>
+          <span>添加商品</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item category" href="#/merchandise/list/1">
+          <i class="fa fa-reorder"></i>
+          <span>商品列表</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item barcode" ng-click="click('barcode')">
+          <i class="fa fa-list-ol"></i>
+          <span>商品排行</span>
+        </a>
+      </div>
+    </div>
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item subscribers" ng-click="scan()">
+          <i class="fa ifa ifa-scan"></i>
+          <span>条码扫描</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item comments" ng-click="click('comments')">
+          <i class="bubble" ng-show="comments.length">
+            {{comments.length}}
+          </i>
+          <i class="fa fa-barcode"></i>
+          <span>条码列表</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item feedback" ng-click="click('feedback')">
+          <i class="bubble" ng-show="feedbacks.length">
+            {{feedbacks.length}}
+          </i>
+          <i class="fa fa-link"></i>
+          <span>条码绑定</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

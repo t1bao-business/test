@@ -1,0 +1,188 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <a ng-href="#/search/home">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        搜索{{type}}
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <!--<i class="fa fa-refresh" ng-click="reload()"></i>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal password">
+          <div class="form-group">
+            <label for="old_passowrd" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <input type="text" ng-model="q" ng-change="onChange()" class="form-control" id="q" placeholder="请输入{{type}}信息" name="q" required autofocus>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <input type="button" class="btn btn-danger btn-block" ng-click="search()" value="搜索" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="jumbotron" ng-show="searching">
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <div class="progress" style="margin: 0px;">
+          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+            <span class="">正在加载...</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- category -->
+  <div ng-show="categories.length && !searching">
+    <div class="merchandise-list margin-top">
+      <div class="list list-bar" ng-repeat="category in categories track by $index">
+        <div class="list-text-item"><span>ID:</span>{{category.id}}</div>
+        <div class="list-text-item"><span>分类名:</span>{{category.name || ""}}</div>
+        <div class="list-text-item"><span>排序号:</span>{{category.order || ""}}</div>
+        <div class="list-text-item">
+          <button class="btn btn-warning" ng-show="!category.online" ng-click="online(category);$event.stopPropagation()">上线
+    </button>
+          <button class="btn btn-success" ng-show="category.online" ng-click="offline(category);$event.stopPropagation()">下线
+    </button>
+
+          <a class="btn btn-info" href="#/category/edit/{{category.id}}">修改
+    </a>
+          <button class="btn btn-danger" ng-click="remove(category);$event.stopPropagation()">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- merchandise -->
+  <div ng-show="merchandises.length && !searching">
+    <div class="row nomargin list list-item" ng-repeat-start="sm in merchandises track by $index">
+      <div class="col-xs-3 clear-text">
+        <img ng-repeat="image in sm.images" ng-src="{{image.url}}" alt="{{image.hash}}" class="image-uploader" />
+      </div>
+      <div class="col-xs-6 clear-text">
+        {{sm.merchandise.name || '&nbsp;'}}
+      </div>
+      <div class="col-xs-3 clear-text">
+        <div class="pointer vertical-center">
+          <i class="fa fa-chevron-down" id="show-item-{{sm.id}}" ng-click="showItem(sm.id)"></i>
+          <i class="fa fa-chevron-up hidden" id="hide-item-{{sm.id}}" ng-click="hideItem(sm.id)"></i>
+        </div>
+      </div>
+    </div>
+    <div class="list list-bar hidden" ng-repeat-end id="list-{{sm.id}}">
+      <div class="list-text-item"><span>ID:</span>{{sm.id}}</div>
+      <div class="list-text-item"><span>商品名:</span>{{sm.merchandise.name || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>品牌:</span>{{sm.merchandise.brand || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>价格:</span>{{sm.price | currency}}</div>
+      <div class="list-text-item"><span>商品描述:</span><br/>{{sm.merchandise.desc || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>分类:</span>{{sm.category.name || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>图片:</span><img ng-repeat="image in sm.images" ng-src="{{image.url}}" alt="{{image.hash}}" class="image-uploader" /></div>
+
+      <div class="list-text-item">
+        <button class="btn btn-warning" ng-show="!sm.online" ng-click="online(sm);$event.stopPropagation()">上线
+    </button>
+        <button class="btn btn-success" ng-show="sm.online" ng-click="offline(sm);$event.stopPropagation()">下线
+    </button>
+
+        <a class="btn btn-info" href="#/merchandise/edit/{{sm.id}}">修改
+    </a>
+        <button class="btn btn-danger" ng-click="remove(sm);$event.stopPropagation()">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- order -->
+  <div ng-show="orders.length && !searching">
+    <div class="list list-bar" ng-repeat="order in orders track by $index">
+      <!-- Default panel contents -->
+      <div class="list-text-item"><span>订单ID:</span>{{order.id}}
+      </div>
+      <div class="list-text-item"><span>订单状态：</span> &nbsp;
+        <button class="btn btn-warning disable btn-xs" disabled ng-show="showState(order, 'CREATED')">已创建
+    </button>
+        <button class="btn btn-warning disable btn-xs" disabled ng-show="showState(order, 'CANCELLED')">已取消
+    </button>
+        <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'ACCEPTED')">已接单
+    </button>
+        <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'PAID')">已支付
+    </button>
+        <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'DELIVERED')">已经发货
+    </button>
+        <button class="btn btn-danger disable btn-xs" disabled ng-show="showState(order, 'UNREACHABLE')">无法送达
+    </button>
+        <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'RECEIVED')">已收货
+    </button>
+        <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'COMMENTED')">已评价
+    </button>
+        <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'FINISHED')">已完成
+    </button>
+      </div>
+
+      <div class="list-text-item"><span>操作：</span>&nbsp;
+
+
+        <button class="btn btn-success btn-xs" ng-show="showTransState(order, 'ACCEPTED')" ng-click="state(order.id, 'ACCEPTED')">接单
+    </button>
+        <button class="btn btn-success btn-xs" ng-show="showTransState(order, 'DELIVERED')" ng-click="state(order.id, 'DELIVERED')">发货
+    </button>
+        <button class="btn btn-success btn-xs" ng-show="showTransState(order, 'FINISHED')" ng-click="state(order.id, 'FINISHED')">完成
+    </button>
+        <button class="btn btn-danger btn-xs" ng-show="showTransState(order, 'CANCELLED')" ng-click="state(order.id, 'CANCELLED')">取消
+    </button>
+      </div>
+      <div class="list-text-item"><span>更多内容</span> <a id="order-detail-show-{{order.no}}" class="btn btn-xs" ng-click="showDetail(order)"><i class="fa fa-caret-down"></i> 详情</a><a id="order-detail-hide-{{order.no}}" class="btn btn-xs hidden" ng-click="hideDetail(order)"><i class="fa fa-caret-up"></i> 隐藏</a></div>
+
+      <div class="hidden" id="order-detail-{{order.no}}">
+        <div class="list-text-item"><span>订单号：</span>{{order.no}}</div>
+        <div class="list-text-item"><span>帐户：</span> <a target="user-info" href="#/user/info/{{order.user.id}}">{{order.user.username || ' '}}</a></div>
+        <div class="list-text-item"><span>下单时间：</span>{{order.createdAt | date}}</div>
+        <div class="list-text-item"><span>接收人：</span>{{order.receiver || "&nbsp;"}}</div>
+        <div class="list-text-item"><span>联系电话：</span>{{order.phone || "&nbsp;"}}</div>
+        <div class="list-text-item"><span>支付方式：</span>{{order.payment | payment}}</div>
+        <div class="list-text-item"><span>配送方式：</span>{{order.delivery | delivery}}</div>
+        <div class="list-text-item"><span>送货地址：</span>{{order.address || "&nbsp;"}}</div>
+        <div class="list-text-item"><span>总数量：</span>{{order.total || "&nbsp;"}}</div>
+        <div class="list-text-item"><span>总价格：</span>{{order.summary | currency}}</div>
+        <div class="inner-list" ng-repeat="merchandise in order.merchandises">
+          <div class="list-text-item">
+            <span>商品名：</span>{{merchandise.name || "&nbsp;"}}
+          </div>
+          <div class="list-text-item">
+            <span>图片：</span>
+            <a ng-href="{{merchandise.url}}" target="merchandise"> <img style="width:40px;height:40px;" ng-src="{{merchandise.url}}" alt="{{merchandise.name}}" /></a>
+          </div>
+          <div class="list-text-item">
+            <span>品牌</span> {{merchandise.brand || "&nbsp;"}}
+          </div>
+          <div class="list-text-item">
+            <span>数量</span> {{merchandise.number || "&nbsp;"}}
+          </div>
+          <div class="list-text-item">
+            <span>单价</span> ¥ {{merchandise.price | currency}}
+          </div>
+          <div class="list-text-item">
+            <span>优惠价</span> {{merchandise.discount || "&nbsp;"}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

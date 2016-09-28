@@ -1,0 +1,35 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <a href="#/grocery/home">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="col-md-6 col-xs-6">
+          意见反馈
+      </div>
+      <div class="col-md-3 col-xs-3">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="feedback">
+          <div class="form-group">
+            <label for="feedback">请输入您的意见或建议</label>
+            <textarea name="feedback" class="form-control" id="feedback"></textarea>
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-danger btn-block" ng-click="feedback()">提交</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

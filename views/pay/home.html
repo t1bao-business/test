@@ -1,0 +1,42 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <i class="fa fa-scan" ng-click="scan()"></i>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        支付设置
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="container">
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item orders" ng-href="#/payment/settings/weixin">
+          <i class="fa fa-weixin"></i>
+          <span>微信支付</span>
+        </a>
+      </div>
+      <!--<div class="col-md-4 col-xs-4">
+        <a class="native-item share disabled" ng-click="click('share')">
+          <i class="fa fa-share-alt"></i>
+          <span>分享店铺</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item system-message disabled" ng-click="click('messages')">
+          <i class="bubble" ng-show="messages.length">
+            {{messages.length}}
+          </i>
+          <i class="fa fa-envelope"></i>
+          <span>系统消息</span>
+        </a>
+      </div>-->
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

@@ -1,0 +1,94 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <a href="#/order/home">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        {{title}}
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <i class="fa fa-chevron-up" ng-click="previousPage()"></i> &nbsp;<i class="fa fa-chevron-down" ng-click="nextPage()"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar order-list">
+  <div class="list list-bar" ng-repeat="order in orders track by $index">
+    <!-- Default panel contents -->
+    <div class="list-text-item"><span>订单ID:</span>{{order.id}}
+    </div>
+    <div class="list-text-item"><span>订单状态：</span> &nbsp;
+      <button class="btn btn-warning disable btn-xs" disabled ng-show="showState(order, 'CREATED')">已创建
+    </button>
+      <button class="btn btn-warning disable btn-xs" disabled ng-show="showState(order, 'CANCELLED')">已取消
+    </button>
+      <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'ACCEPTED')">已接单
+    </button>
+      <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'PAID')">已支付
+    </button>
+      <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'DELIVERED')">已经发货
+    </button>
+      <button class="btn btn-danger disable btn-xs" disabled ng-show="showState(order, 'UNREACHABLE')">无法送达
+    </button>
+      <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'RECEIVED')">已收货
+    </button>
+      <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'COMMENTED')">已评价
+    </button>
+      <button class="btn btn-default disable btn-xs" disabled ng-show="showState(order, 'FINISHED')">已完成
+    </button>
+    </div>
+
+    <div class="list-text-item"><span>操作：</span>&nbsp;
+
+
+      <button class="btn btn-success btn-xs" ng-show="showTransState(order, 'ACCEPTED')" ng-click="state(order.id, 'ACCEPTED')">接单
+    </button>
+      <button class="btn btn-success btn-xs" ng-show="showTransState(order, 'DELIVERED')" ng-click="state(order.id, 'DELIVERED')">发货
+    </button>
+      <button class="btn btn-success btn-xs" ng-show="showTransState(order, 'FINISHED')" ng-click="state(order.id, 'FINISHED')">完成
+    </button>
+      <button class="btn btn-danger btn-xs" ng-show="showTransState(order, 'CANCELLED')" ng-click="state(order.id, 'CANCELLED')">取消
+    </button>
+    </div>
+    <div class="list-text-item"><span>更多内容</span> <a id="order-detail-show-{{order.no}}" class="btn btn-xs" ng-click="showDetail(order)"><i class="fa fa-caret-down"></i> 详情</a><a id="order-detail-hide-{{order.no}}" class="btn btn-xs hidden" ng-click="hideDetail(order)"><i class="fa fa-caret-up"></i> 隐藏</a></div>
+
+    <div class="hidden" id="order-detail-{{order.no}}">
+      <div class="list-text-item"><span>订单号：</span>{{order.no}}</div>
+      <div class="list-text-item"><span>帐户：</span> <a target="user-info" href="#/user/info/{{order.user.id}}">{{order.user.username || ' '}}</a></div>
+      <div class="list-text-item"><span>下单时间：</span>{{order.createdAt | date}}</div>
+      <div class="list-text-item"><span>接收人：</span>{{order.receiver || "&nbsp;"}}</div>
+      <div class="list-text-item"><span>联系电话：</span>{{order.phone || "&nbsp;"}}</div>
+      <div class="list-text-item"><span>支付方式：</span>{{order.payment | payment}}</div>
+      <div class="list-text-item"><span>配送方式：</span>{{order.delivery | delivery}}</div>
+      <div class="list-text-item"><span>送货地址：</span>{{order.address || "&nbsp;"}}</div>
+      <div class="list-text-item"><span>总数量：</span>{{order.total || "&nbsp;"}}</div>
+      <div class="list-text-item"><span>总价格：</span>{{order.summary | currency}}</div>
+      <div class="inner-list" ng-repeat="merchandise in order.merchandises">
+        <div class="list-text-item">
+          <span>商品名：</span>{{merchandise.name || "&nbsp;"}}
+        </div>
+        <div class="list-text-item">
+          <span>图片：</span>
+          <a ng-href="{{merchandise.url}}" target="merchandise"> <img style="width:40px;height:40px;" ng-src="{{merchandise.url}}" alt="{{merchandise.name}}" /></a>
+        </div>
+        <div class="list-text-item">
+          <span>品牌</span> {{merchandise.brand || "&nbsp;"}}
+        </div>
+        <div class="list-text-item">
+          <span>数量</span> {{merchandise.number || "&nbsp;"}}
+        </div>
+        <div class="list-text-item">
+          <span>单价</span> ¥ {{merchandise.price | currency}}
+        </div>
+        <div class="list-text-item">
+          <span>优惠价</span> {{merchandise.discount || "&nbsp;"}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

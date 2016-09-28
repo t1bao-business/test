@@ -1,0 +1,100 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <a href="#/merchandise/home"> <i class="fa fa-arrow-left"></i> </a>
+      </div>
+      <div class="col-md-6 col-xs-6">商品列表</div>
+      <div class="col-md-3 col-xs-3">
+        <i class="fa fa-chevron-up" ng-show="page > 1" ng-click="pageStep()"></i> &nbsp;<i class="fa fa-chevron-down" ng-click="pageStep(true)"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="tab-bar">
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="dropdown">
+          <a class="btn dropdown-toggle" type="button" id="category-dropdown" data-toggle="dropdown" aria-expanded="true">
+          分类&nbsp;<span class="caret"></span>
+        </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="category-dropdown">
+            <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="selectCategory({name:'全部分类', value: 'all'})">全部分类</a>
+            </li>
+            <li role="presentation" ng-repeat="category in categories">
+              <a role="menuitem" tabindex="-1" ng-click="selectCategory(category)">{{category.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="dropdown">
+          <a class="btn dropdown-toggle" type="button" id="order-dropdown" data-toggle="dropdown" aria-expanded="true">
+          排序&nbsp;<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="order-dropdown">
+            <li role="presentation" ng-repeat="order in orders">
+              <a role="menuitem" tabindex="-1" ng-click="selectOrder(order)">{{order.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="dropdown">
+          <a class="btn dropdown-toggle" type="button" id="online-dropdown" data-toggle="dropdown" aria-expanded="true">
+          上下线&nbsp;<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="online-dropdown">
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" ng-click="selectOnline('all')">全部</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" ng-click="selectOnline('online')">上线</a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" ng-click="selectOnline('offline')">下线</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-body-bar">
+    <div class="row nomargin list list-item" ng-repeat-start="sm in merchandises track by $index">
+      <div class="col-xs-3 clear-text">
+        <img ng-repeat="image in sm.images" ng-src="{{image.url}}" alt="{{image.hash}}" class="image-uploader" />
+      </div>
+      <div class="col-xs-6 clear-text">
+        {{sm.merchandise.name || '&nbsp;'}}
+      </div>
+      <div class="col-xs-3 clear-text">
+        <div class="pointer vertical-center">
+          <i class="fa fa-chevron-down" id="show-item-{{sm.id}}" ng-click="showItem(sm.id)"></i>
+          <i class="fa fa-chevron-up hidden" id="hide-item-{{sm.id}}" ng-click="hideItem(sm.id)"></i>
+        </div>
+      </div>
+    </div>
+    <div class="list list-bar hidden" ng-repeat-end id="list-{{sm.id}}">
+      <div class="list-text-item"><span>ID:</span>{{sm.id}}</div>
+      <div class="list-text-item"><span>商品名:</span>{{sm.merchandise.name || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>品牌:</span>{{sm.merchandise.brand || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>价格:</span>{{sm.price | currency}}</div>
+      <div class="list-text-item"><span>商品描述:</span><br/>{{sm.merchandise.desc || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>分类:</span>{{sm.category.name || '&nbsp;'}}</div>
+      <div class="list-text-item"><span>图片:</span><img ng-repeat="image in sm.images" ng-src="{{image.url}}" alt="{{image.hash}}" class="image-uploader" /></div>
+
+      <div class="list-text-item">
+        <button class="btn btn-warning" ng-show="!sm.online" ng-click="online(sm);$event.stopPropagation()">上线
+    </button>
+        <button class="btn btn-success" ng-show="sm.online" ng-click="offline(sm);$event.stopPropagation()">下线
+    </button>
+
+        <a class="btn btn-info" href="#/merchandise/edit/{{sm.id}}">修改
+    </a>
+        <button class="btn btn-danger" ng-click="remove(sm);$event.stopPropagation()">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

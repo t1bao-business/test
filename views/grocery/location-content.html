@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+    <div class="map-controller">
+      <table style="width:100%;">
+        <tr>
+          <td>纬度:</td>
+          <td><span class="latitude">{{latitude || '0.00'}}</span></td>
+          <td rowspan="2"><a class="btn btn-danger" ng-click="saveLocation()">保存</a></td>
+        </tr>
+        <tr>
+          <td>经度: </td>
+          <td><span class="longitude">{{longitude || '0.00'}}</span></td>
+        </tr>
+      </table>
+      <p class="alert alert-info text-center">
+        请点击地图设置门店位置
+      </p>
+    </div>
+
+  </div>
+    <div class="map" map-lazy-load="http://maps.google.cn/maps/api/js?region=cn&language=zh-CN&key=AIzaSyBtvL35LnY7dsDvbqhSNo-QENP76Za1wEw"
+      map-lazy-load-params="">
+      <p class="alert alert-danger text-center" ng-show="notLoaded">正在加载地图信息，请耐心等待...</p>
+      <ng-map center="34.7, 98.2" zoom="3">
+        <!-- <marker position="{{latitude || 34.7}}, {{longitude || 98.2}}"></marker> -->
+      </ng-map>
+    </div>
+  </div>
+</div>

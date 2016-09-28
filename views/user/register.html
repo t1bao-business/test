@@ -1,0 +1,64 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-2"></div>
+      <div class="col-md-6 col-xs-8">店长注册</div>
+      <div class="col-md-3 col-xs-2"></div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 col-lg-12">
+        <form class="user-register">
+          <div class="form-group" ng-show="!checked">
+            <label for="image-captcha">图片验证码：</label>
+
+            <p id="image-captcha"><span data="{{url}}captcha/image" ng-click="updateImage()"><img
+            src="{{url}}captcha/image"/>
+            </span>
+              <i class="fa fa-check-circle" ng-show="captcha && checked"></i>
+              <i class="fa fa-times-circle" ng-show="captcha && !checked"> 验证码错误</i>
+              <button class="btn btn-warning btn-xs" ng-click="updateImage()">刷新</button>
+            </p>
+          </div>
+          <div class="form-group" ng-show="!checked">
+            <label>输入图片验证码：</label>
+            <input name="captchaImage" type="text" class="form-control" placeholder="验证码">
+            <br/>
+            <p class="text-info">验证码正确后，注册流程会自动开启</p>
+          </div>
+          <div class="form-group" ng-show="checked">
+            <label for="phone">请输入手机号</label>
+            <input name="phone" id="phone" type="phone" class="form-control" ng-model="phone" placeholder="手机号">
+          </div>
+          <div class="form-group" ng-show="checked">
+            <label>输入短信验证码：</label>
+            <input name="captchaSms" type="text" class="form-control" placeholder="验证码" ng-model="captchaString">
+          </div>
+          <div class="form-group" ng-show="checked && !fetching">
+            <label>          <a class="btn btn-color-egg-blue btn-get-sms-captcha" ng-click="getCaptcha()">获取验证码</a>
+          </label>
+          </div>
+
+          <p class="center"><a class="btn btn-success btn-block btn-register" ng-class="{disabled: !checked}" ng-click="phoneRegister()">注册</a></p>
+          <hr/>
+          <p class="alert-primary visible-xs-block text-left" role="alert">
+            已有账号? 马上
+            <a class="btn btn-danger" href="#/user/login">登录</a>
+          </p>
+          <p class="alert-primary visible-xs-block text-right" role="alert">
+            忘记密码？马上
+            <a class="btn btn-default" href="#/user/password/retrieve">找回</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /container -->
+<div ng-include src="'views/modal.html'"></div>
+
+<div ng-include src="'views/footer.html'"></div>

@@ -1,0 +1,157 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <a href="#/grocery/home">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="col-md-6 col-xs-6">{{grocery.name}}(预览)</div>
+      <div class="col-md-3 col-xs-3">
+        <a>
+          <i class="fa fa-heart"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="tab-bar">
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4" ng-class="{'active': column == 'default'}" ng-click="showInfo()">
+        <p role="menuitem" tabindex="-1">
+          <i class="fa fa-tags"></i>
+          <span>商品</span>
+        </p>
+      </div>
+      <div class="col-md-4 col-xs-4" ng-class="{'active': column == 'profile'}" ng-click="showProfile()">
+        <p role="menuitem" tabindex="-1">
+          <i class="fa fa-info"></i>
+          <span>介绍</span>
+        </p>
+      </div>
+      <div class="col-md-4 col-xs-4" ng-class="{'active': column == 'comments'}" ng-click="showComments()">
+        <p role="menuitem" tabindex="-1">
+          <i class="fa fa-comments"></i>
+          <span>评论</span>
+        </p>
+      </div>
+    </div>
+    <div class="row nomargin grocery-merchandise" ng-show="!fetched">
+      <div class="col-md-12 col-xs-12">
+        <div class="row no-merchandise loading" ng-show="!listed && !fetched">
+          <div class="jumbotron">
+            <div class="container">
+              <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                  aria-valuemax="100" style="width: 100%"></div>
+              </div>
+              <div class="alert alert-warning" role="alert">
+                正在加载信息...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row nomargin" ng-show="fetched && infoList">
+      <div class="col-md-3 col-xs-3 list">
+        <div class="list-group" id="">
+          <a class="list-group-item active" id="category-0" ng-click="getCategory()">
+            全部
+          </a>
+          <a class="list-group-item" ng-click="getCategory(category)" id="category-{{category.id}}" ng-repeat="category in categories">{{category.name}}</a>
+        </div>
+      </div>
+      <div class="col-md-9 col-xs-9 grocery-merchandise-list list">
+        <div class="row nomargin merchandise riched-item" ng-repeat="merchandise in merchandises" ng-show="listed">
+          <div class="col-md-12 col-xs-12 color" ng-class="{'color-even': $even, 'color-odd': $odd}">
+            <div class="image">
+              <i class="fa fa-image" aria-hidden="true" ng-show="!merchandise.images || !merchandise.images.length"></i>
+              <img ng-src="{{image.url}}" alt="{{merchandise.name}}" ng-repeat="image in merchandise.images | limitTo: 1">
+
+            </div>
+            <div class="caption">
+              <div class="counter merchandise-counter"></div>
+              <p class="merchandise">{{merchandise.merchandise.name}}</p>
+
+              <p class="sell">已经销售{{merchandise.number || 0}}件</p>
+
+              <p class="">
+                <b>¥</b>&nbsp;<span>{{merchandise.price | currency}}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row nomargin no-merchandise" ng-show="listed && (!merchandises || merchandises.length < 1)">
+          <div class="alert text-center">
+            <p>
+              <i class="fa fa-leaf not-found  middle-icon"></i>
+            </p>
+
+            <p class="note  middle-font">
+              分类商品未找到！
+            </p>
+
+          </div>
+        </div>
+        <div class="row nomargin no-merchandise loading" ng-show="!listed && fetched">
+          <div class="jumbotron">
+            <div class="container">
+              <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                  aria-valuemax="100" style="width: 100%"></div>
+              </div>
+              <div class="alert alert-warning" role="alert">
+                正在加载商品信息...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="profiled" class="grocery-profile">
+      <ul class="list pad">
+        <li class="list-text-item">
+          <span>门店名称</span>{{grocery.name}}</li>
+        <li class="list-text-item">
+          <span>门店Logo</span><img src="{{grocery.logo}}" class="logo image-uploader" /></li>
+        <li class="list-text-item">
+          <span>地址</span>{{grocery.address}}</li>
+        <li class="list-text-item">
+          <span>联系电话</span>{{grocery.phone}}</li>
+        <li class="list-text-item">
+          <span>营业时间</span>{{grocery.start_time}} - {{grocery.end_time}}
+        </li>
+        <li class="list-text-item">
+          <span>配送支持</span>{{grocery.delivery ? '是' : '否'}}</li>
+        <li class="list-text-item" ng-show="grocery.delivery">
+          <span>配送范围</span>{{grocery.delivery_distance.toFixed(2)}}
+        </li>
+        <li class="list-text-item" ng-show="grocery.delivery">
+          <span>配送费用</span>{{grocery.delivery_fee | currency}}
+        </li>
+        <li class="list-text-item" ng-show="grocery.delivery">
+          <span>起送价</span>{{grocery.delivery_limit | currency}}
+        </li>
+      </ul>
+    </div>
+
+    <div ng-show="comments" class="grocery-comments">
+      <div class="alert text-center">
+        <p>
+          <i class="fa fa-comments not-found big-icon"></i>
+        </p>
+        <p class="note big-font">
+          暂无评论！
+        </p>
+
+      </div>
+    </div>
+  </div>
+  <grocery-cart ng-show="fetched && infoList"></grocery-cart>
+</div>
+
+<div ng-include src="'views/footer.html'"></div>

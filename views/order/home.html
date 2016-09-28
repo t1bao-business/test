@@ -1,0 +1,86 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <i class="ifa ifa-arr" ng-click="scan()"></i>
+      </div>
+      <div class="col-md-6 col-xs-6">
+        订单详情
+      </div>
+      <div class="col-md-3 col-xs-3">
+        <a href="#/search/order">
+          <i class="fa fa-search"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="container">
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item orders" ng-href="#/order/created/list/1">
+          <i class="bubble" ng-show="orders.length">
+            {{orders.length}}
+          </i>
+          <i class="fa fa-file-text"></i>
+          <span>新订单</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item share" ng-href="#/order/accepted/list/1">
+          <i class="bubble" ng-show="messages.length">
+            {{messages.length}}
+          </i>
+          <i class="fa fa-file-text"></i>
+          <span>待处理订单</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item system-message" ng-href="#/order/delivered/list/1">
+          <i class="bubble" ng-show="messages.length">
+            {{messages.length}}
+          </i>
+          <i class="fa fa-file-text"></i>
+          <span>已经发货</span>
+        </a>
+      </div>
+    </div>
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item merchandise" ng-href="#/order/received/list/1">
+          <i class="fa fa-file-text"></i>
+          <span>已经接收</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item category" ng-href="#/order/cancelled/list/1">
+          <i class="fa fa-file-text"></i>
+          <span>已经取消</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item barcode" ng-href="#/order/commented/list/1">
+          <i class="fa fa-comments"></i>
+          <span>已经评价</span>
+        </a>
+      </div>
+    </div>
+    <div class="row menu">
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item finished" ng-href="#/order/finished/list/1">
+          <i class="fa fa-file-text"></i>
+          <span>已经完成</span>
+        </a>
+      </div>
+      <div class="col-md-4 col-xs-4">
+        <a class="native-item finished" ng-href="#/order/all/list/1">
+          <i class="fa fa-file-text"></i>
+          <span>所有订单</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

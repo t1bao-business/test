@@ -1,0 +1,37 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3"></div>
+      <div class="col-md-6 col-xs-6">
+        位置设置
+      </div>
+      <div class="col-md-3 col-xs-3">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="body-bar">
+  <div class="tab-bar">
+    <div class="row">
+      <div class="col-md-6 col-xs-6" ng-class="{'active': type === 'profile'}">
+        <p>
+          <a href="#/grocery/settings">
+            设置
+          </a>
+        </p>
+      </div>
+      <div class="col-md-6 col-xs-6" ng-class="{'active': type === 'location'}">
+        <p>
+          <a href="#/grocery/location">
+            定位
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div ng-include src="'views/grocery/location-content.html'" class="tab-body-bar"></div>
+
+</div>
+<div ng-include src="'views/footer.html'"></div>

@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-xs-12 col-lg-12">
+
+      <form class="form-horizontal grocery modify pad" role="form" enctype="multipart/form-data">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">门店名称:</label>
+
+          <div class="col-sm-10">
+            <input type="email" class="form-control" ng-model="grocery.name" name="name" placeholder="名称" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">门店电话:</label>
+
+          <div class="col-sm-10">
+            <input type="tel" class="form-control" ng-model="grocery.phone" name="phone" placeholder="电话" required>
+          </div>
+        </div>
+        <div class="form-group no-line">
+          <label class="col-sm-2 control-label">营业时间:</label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon">开始<code class="hidden-xs">时间</code>
+              </span>
+              <input type="time" class="form-control datepicker" placeholder="请输入开始时间" aria-describedby="开始时间" ng-value="grocery.start_time" name="start_time" required/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label"></label>
+
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon">结束<code class="hidden-xs">时间</code>
+              </span>
+              <input type="time" class="form-control datepicker" placeholder="请输入结束时间" aria-describedby="结束时间" ng-value="grocery.end_time" name="end_time" required/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">门店地址:</label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="grocery.address" name="address" placeholder="地址" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">门店介绍:</label>
+
+          <div class="col-sm-10">
+            <textarea class="form-control" ng-model="grocery.intro" name="intro" placeholder="介绍" required></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">门店logo:</label>
+
+          <div class="col-sm-10">
+            <img ng-src="{{grocery.logo.url}}" ng-show="grocery.logo.url" class="image-uploader grocery-edit-image-{{grocery.logo.id}}" ng-click="removeImage(grocery.logo.id)"/>
+            <div class="image-uploader">
+              <input type="file" class="form-control" id="mod-file" name="logo" placeholder="请输入图片"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">配送选项:</label>
+
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="delivery" value="true" ng-checked="grocery.delivery">
+                支持
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="delivery" value="false" ng-checked="!grocery.delivery" ng-click="disableDelivery()">
+                不支付
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">起送金额:</label>
+
+          <div class="col-sm-10">
+            <input class="form-control" ng-model="grocery.delivery_limit" name="delivery_limit" placeholder="0.0" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">最远配送距离:</label>
+
+          <div class="col-sm-10">
+            <input class="form-control" ng-model="grocery.delivery_distance" name="delivery_distance" placeholder="0.0" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">最低配送费:</label>
+
+          <div class="col-sm-10">
+            <input class="form-control" ng-model="grocery.delivery_fee" name="delivery_fee" placeholder="0.0" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <a type="button" class="btn btn-danger btn-block" ng-click="modify(grocery)">保存</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
