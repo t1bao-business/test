@@ -1,0 +1,29 @@
+<div class="header-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-xs-3">
+        <a href="#/grocery/home">
+          <i class="fa fa-arrow-left"></i>
+        </a>
+      </div>
+      <div class="col-md-6 col-xs-6">分享链接</div>
+      <div class="col-md-3 col-xs-3">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="body-bar">
+  <div class="about">
+    <h2>你的店铺地址</h2>
+    <h3>{{shareUrl}}</h3>
+    <p>
+      <a href="{{shareUrl}}" href="{{shareUrl}}">点击访问</a>
+    </p>
+    <h2>
+      <a class="btn btn-default" ng-click="click('shareweixin')">
+        <i class="fa fa-wechat"></i> 微信分享
+        </a>
+      </h2>
+  </div>
+</div>
+<div ng-include src="'views/footer.html'"></div>
