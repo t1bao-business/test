@@ -1,0 +1,35 @@
+.egg {
+  .image-uploader {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 64px;
+    height: 64px;
+    background-color: #eee;
+    * {
+      position: absolute;
+      display: block;
+      width: 64px;
+      height: 64px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      left: 0;
+      top: 0;
+    }
+    > input[type=file] {
+      opacity: 0;
+    }
+  }
+  .image-uploader:before {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    content: "+";
+    font-size: 48px;
+    display: block;
+    text-align: center;
+    width: 64px;
+    height: 64px;
+    line-height: 60px;
+  }
+}
